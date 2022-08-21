@@ -49,7 +49,7 @@ const InvestasiIdr = () => {
                 <div className="col-sm-4">
                   <label for="inputPassword" className="col-form-label label-diskon">
                     <span className="me-2 text-diskon">Diskon</span>
-                    <span className='text-value-diskon'>6%</span>
+                    <span className='text-value-diskon'>20%</span>
                   </label>
                 </div>
               </div>
