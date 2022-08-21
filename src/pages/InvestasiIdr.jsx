@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
+import convertRupiah from "rupiah-format";
 
 const InvestasiIdr = () => {
+
+  const [jumlah, setJumlah] = useState(1)
+
+  const handlePlus = () => {
+    setJumlah(jumlah+1)
+  }
+
+  const handleMinus = () => {
+    if (jumlah > 0) {
+      setJumlah(jumlah-1)
+    }
+  }
+
   return (
-    <div className="container p-5">
+    <div className="container-md p-5">
       <div className="mb-4">
         <h1>Kalkulator Investasi</h1>
       </div>
@@ -27,9 +41,11 @@ const InvestasiIdr = () => {
             </label>
             <div className="col-sm-8">
               <input
-                type="password"
-                className="form-control"
+                type="text"
+                className="form-control grey"
                 id="inputPassword"
+                value={convertRupiah.convert(200000000)}
+                disabled
               />
             </div>
           </div>
@@ -39,17 +55,22 @@ const InvestasiIdr = () => {
             </label>
             <div className="col-sm-8">
               <div className="row">
-                <div className="col-sm-8">
+                <div className="col-sm-7">
                   <input
-                    type="password"
-                    className="form-control"
+                    type="text"
+                    className="form-control grey"
                     id="inputPassword"
+                    value={convertRupiah.convert(176000000)}
+                    disabled
                   />
                 </div>
                 <div className="col-sm-4">
-                  <label for="inputPassword" className="col-form-label label-diskon">
-                    <span className="me-2 text-diskon">Diskon</span>
-                    <span className='text-value-diskon'>20%</span>
+                  <label
+                    for="inputPassword"
+                    className="col-form-label label-diskon"
+                  >
+                    <span className="me-1 text-diskon">Diskon</span>
+                    <span className="text-value-diskon">5.88%</span>
                   </label>
                 </div>
               </div>
@@ -59,12 +80,20 @@ const InvestasiIdr = () => {
             <label for="inputPassword" className="col-sm-4 col-form-label">
               Unit Dibeli
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-5 d-flex counter">
+              <button className="minus" onClick={handleMinus}>
+                -
+              </button>
               <input
-                type="password"
+                type="text"
                 className="form-control"
                 id="inputPassword"
+                value={jumlah}
+                readOnly
               />
+              <button className="plus" onClick={handlePlus}>
+                +
+              </button>
             </div>
           </div>
           <div className="input-group row">
@@ -73,10 +102,10 @@ const InvestasiIdr = () => {
             </label>
             <div className="col-sm-8">
               <select class="form-select" aria-label="Default select example">
-                <option selected>Pilih Tipe Unit</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option selected>Pilih Periode</option>
+                <option value="6 Bulan">One</option>
+                <option value="12 Bulan">Two</option>
+                <option value="24 Bulan">Three</option>
               </select>
             </div>
           </div>
@@ -85,11 +114,7 @@ const InvestasiIdr = () => {
               Auto Reinvest
             </label>
             <div className="col-sm-8">
-              <input
-                type="password"
-                className="form-control"
-                id="inputPassword"
-              />
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled></input>
             </div>
           </div>
         </div>
