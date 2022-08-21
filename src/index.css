@@ -70,6 +70,7 @@ select:focus {
   width: 30px !important;
   height: 30px !important;
   background-color: #FF6464 !important;
+  border: 1px solid #FF6464 !important;
   /* background-color: white !important; */
 }
 

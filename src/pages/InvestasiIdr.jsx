@@ -29,9 +29,9 @@ const InvestasiIdr = () => {
             <div className="col-sm-8">
               <select class="form-select" aria-label="Default select example">
                 <option selected>Pilih Tipe Unit</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option value="24">24/66</option>
+                <option value="27">27/60</option>
+                <option value="33">33/72</option>
               </select>
             </div>
           </div>
@@ -103,9 +103,9 @@ const InvestasiIdr = () => {
             <div className="col-sm-8">
               <select class="form-select" aria-label="Default select example">
                 <option selected>Pilih Periode</option>
-                <option value="6 Bulan">One</option>
-                <option value="12 Bulan">Two</option>
-                <option value="24 Bulan">Three</option>
+                <option value="6 Bulan">6 Bulan</option>
+                <option value="12 Bulan">12 Bulan</option>
+                <option value="24 Bulan">24 Bulan</option>
               </select>
             </div>
           </div>
@@ -114,11 +114,18 @@ const InvestasiIdr = () => {
               Auto Reinvest
             </label>
             <div className="col-sm-8">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked disabled></input>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckChecked"
+                checked
+                disabled
+              ></input>
             </div>
           </div>
         </div>
-        <div className="col-sm-6">
+        <div className="col-sm-12 col-md-6">
           <div className="card card-detail">
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -166,7 +173,7 @@ const InvestasiIdr = () => {
         </div>
       </div>
       <div className="row row-mb">
-        <div className="col-sm-12 col-md-6">
+        <div className="col-6 col-sm-12">
           <table className="table table-borderless">
             <thead>
               <tr>
