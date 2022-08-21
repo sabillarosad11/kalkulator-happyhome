@@ -173,7 +173,7 @@ const InvestasiIdr = () => {
         </div>
       </div>
       <div className="row row-mb">
-        <div className="col-6 col-sm-12">
+        <div className="col-12 col-md-6">
           <table className="table table-borderless">
             <thead>
               <tr>

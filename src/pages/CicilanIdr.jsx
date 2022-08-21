@@ -1,30 +1,18 @@
-import React, {useState} from 'react'
+import React from 'react'
 import convertRupiah from "rupiah-format";
 
 const CicilanIdr = () => {
 
-  const [jumlah, setJumlah] = useState(1);
-
-  const handlePlus = () => {
-    setJumlah(jumlah + 1);
-  };
-
-  const handleMinus = () => {
-    if (jumlah > 0) {
-      setJumlah(jumlah - 1);
-    }
-  };
-
   return (
     <div className="container-md p-5">
       <div className="mb-4">
-        <h1>Kalkulator Investasi</h1>
-        <span className="mb-4">
+        <h1>Kalkulator Cicilan</h1>
+        <span className="mb-4 text-simulasi">
           Simulasikan cicilan sewa dan cicilan KPR dengan mudah disini
         </span>
       </div>
       <div className="row row-mb">
-        <div className="col-sm-6">
+        <div className="col-md-6">
           <div className="input-group row">
             <label for="inputPassword" className="col-sm-4 col-form-label">
               Tipe Rumah
@@ -107,49 +95,49 @@ const CicilanIdr = () => {
           </div>
         </div>
 
-        <div className="col-sm-6">
-          <div className="card card-detail">
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between">
-              <p>Harga Jual</p>
-              <p className="text-bold">Rp 200,000,000</p>
+        <div className="col-md-6">
+          <div className="card card-detail card-cicilan">
+            <div className="mt-4 text-wrapper d-flex justify-content-between">
+              <p>Cicilan BRI</p>
+              <p>Total DP</p>
             </div>
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between">
-              <p>Diskon</p>
-              <p className="text-bold">5.88%</p>
-            </div>
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between">
-              <p>Harga Beli</p>
-              <p className="text-bold">Rp 176,000,000</p>
-            </div>
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between">
-              <p>DP</p>
-              <p className="text-bold">Rp 58,666,667</p>
-            </div>
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between">
-              <p>Pelunasan HappyHomes</p>
-              <p className="text-bold">Rp 117,000,000</p>
-            </div>
-            <hr />
-            <div className="text-wrapper d-flex flex-column align-items-center text-bold">
-              <p>Keuntungan Penjualan</p>
-              <p className="price-column">Rp 24,000,000</p>
-            </div>
-            <hr />
-            <div className="text-wrapper d-flex justify-content-between mb-4 text-bold">
-              <div className="text-wrapper d-flex flex-column align-items-center">
-                <p>Keuntungan HHIT</p>
-                <p className="price-column">Rp 16,000,000</p>
+            <div className="mt-2 mb-2 text-wrapper d-flex justify-content-between">
+              <div className="d-flex align-items-end">
+                <span className="text-rp">Rp</span>
+                <span className="text-price">100,000,000</span>
               </div>
-              <div className="text-wrapper d-flex flex-column align-items-center">
-                <p>Keuntungan</p>
-                <p className="price-column">Investmen Buyer</p>
-                <p className="price-column">Rp 8,000,000</p>
+              <div className="d-flex align-items-end">
+                <span className="text-rp">Rp</span>
+                <span className="text-price">100,000,000</span>
               </div>
+            </div>
+            <hr />
+            <div className="text-wrapper d-flex justify-content-between">
+              <p>Lama Cicilan DP</p>
+              <p className="text-bold">6 Tahun</p>
+            </div>
+            <hr />
+            <div className="text-wrapper d-flex justify-content-between">
+              <p>Cicilan DP</p>
+              <div className="d-flex">
+                <p className="text-bold">Rp 1,590,000</p>
+                <p>/bulan</p>
+              </div>
+            </div>
+            <hr />
+            <div className="text-wrapper d-flex justify-content-between">
+              <p>Plafon Cicilan</p>
+              <p className="text-bold">Rp 181,260,000</p>
+            </div>
+            <hr />
+            <div className="text-wrapper d-flex justify-content-between">
+              <p>Bunga Cicilan</p>
+              <p className="text-bold">8.75%</p>
+            </div>
+            <hr />
+            <div className="text-wrapper d-flex">
+              <p className="text-bold">Keterangan:</p>
+              <p className='ms-1'>5 Tahun Fix Interest, setelah itu float</p>
             </div>
           </div>
         </div>
