@@ -9,19 +9,34 @@ const CicilanIdr = () => {
   const [pilihCicilan, setPilihCicilan] = useState();
   const [bunga, setBunga] = useState();
   const [dp, setDp] = useState();
-  const [diskon, setDiskon] = useState()
-  const [lamaCicilan, setLamaCicilan] = useState()
+  const [diskon, setDiskon] = useState();
+  const [lamaCicilan, setLamaCicilan] = useState();
+  const [cicilan, setCicilan] = useState();
+  const [cicilDp, setCicilDp] = useState()
+  const [cicilanBln, setCicilanBln] = useState();
+  const [tc, setTc] = useState();
 
   const handleUnit = (e) => {
     setTipeUnit(e.target.value);
   };
 
   const handleCicilan = (e) => {
-    setPilihCicilan(e.target.value)
+    setPilihCicilan(e.target.value);
   }
 
   const handleLamaCicilan = (e) => {
     setLamaCicilan(e.target.value)
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d* )(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function handleNan(x) {
+    if (isNaN(x) || x === Infinity) {
+      return 0
+    }
+    return x;
   }
 
   useEffect(() => {
@@ -33,21 +48,58 @@ const CicilanIdr = () => {
       ? setHargaJual(300000000)
       : setHargaJual(0);
 
+    // pilihCicilan === "BRI"
+    //   ? setLamaCicilan(5)
+    //   : pilihCicilan === "HHIT"
+    //   ? setLamaCicilan(5)
+    //   : pilihCicilan === "Kas Keras" ? setLamaCicilan(1) : setLamaCicilan(0);
+
     setHargaBeli((1 - 12 / 100) * hargaJual);
 
     pilihCicilan === 'HHIT' ? setBunga(6/100) : pilihCicilan === 'BRI' ? setBunga(8.75/100) : setBunga(0)
+
     pilihCicilan === "HHIT"
       ? setDp(33.333333333 / 100)
       : pilihCicilan === "BRI"
       ? setDp(1 / 100)
-      : setDp(5/100);
-    // pilihCicilan === "HHIT"
-    //   ? setBunga(6 / 100)
-    //   : pilihCicilan === "BRI"
-    //   ? setBunga(8.75 / 100)
-    //   : setBunga(0);
+      : pilihCicilan === "Kas Keras" ? setDp(5/100) : setDp(0);
+
+    pilihCicilan === "HHIT"
+      ? setCicilDp(1)
+      : pilihCicilan === "BRI"
+      ? setCicilDp(6)
+      : pilihCicilan === "Kas Keras" ? setCicilDp(3) : setCicilDp(0);
+
     pilihCicilan === 'BRI' ? setDiskon(0) : setDiskon(6/100)
-  },[hargaJual, pilihCicilan, tipeUnit, diskon]);
+
+    cicilDp === 6
+      ? setCicilanBln((dp * hargaBeli) / cicilDp / 12)
+      : cicilDp === 3
+      ? setCicilanBln((dp * hargaBeli) / cicilDp / 12)
+      : cicilDp === 1 ? setCicilanBln((dp * hargaBeli) / cicilDp / 12) : setCicilanBln(0);
+
+    pilihCicilan === "HHIT" ? setTc('Max 5 Tahun') : pilihCicilan === "BRI" ? setTc('5 Tahun Fix Interest, setelah itu float') : pilihCicilan === "Kas Keras" ? setTc('Dicicil 1 Tahun') : setTc('')
+
+
+    let r = (bunga * 100) / 12;
+    // console.log('pilih cicilan', pilihCicilan)
+    console.log('bunga', bunga*100)
+    console.log('r', r)
+    console.log('r', typeof(r))
+    let plafonCicilan = Math.round(hargaBeli - dp * hargaBeli);
+    console.log('plafon cicilan', plafonCicilan)
+    let n = lamaCicilan*12
+    console.log('lama cicilan', lamaCicilan)
+    console.log('n', n)
+    // r === 0 ? console.log(true) : console.log(false);
+    console.log('dp', dp)
+
+  
+    r === 0
+      ? setCicilan(plafonCicilan / n)
+      :  setCicilan(plafonCicilan * (((r/100) * (1 + (r/100))) ^ n) /((1 + (r/100)) ^ (n- 1)));
+
+  },[hargaJual, pilihCicilan, tipeUnit, diskon, bunga, lamaCicilan, dp, cicilan, cicilDp, hargaBeli]);
 
   return (
     <div className="container-md p-5">
@@ -139,34 +191,47 @@ const CicilanIdr = () => {
               Lama Cicilan
             </label>
             <div className="col-sm-8">
-              <select
+                {pilihCicilan === "BRI" ? (
+                  <select
                 class="form-select"
                 aria-label="Default select example"
-                onChange={handleLamaCicilan}
-              >
-                <option selected>Pilih Periode</option>
-                <option
-                  value={
-                    pilihCicilan === "BRI"
-                      ? 5
-                      : pilihCicilan === "HHIT"
-                      ? 5
-                      : null
-                  }
-                >
-                  {pilihCicilan === "BRI"
-                    ? "5 Tahun"
-                    : pilihCicilan === "HHIT"
-                    ? "5 Tahun"
-                    : ""}
-                </option>
-                <option value={pilihCicilan === "BRI" ? 10 : null}>
-                  {pilihCicilan === "BRI" ? "10 Tahun" : ""}
-                </option>
-                <option value={pilihCicilan === "BRI" ? 15 : null}>
-                  {pilihCicilan === "BRI" ? "15 Tahun" : ""}
-                </option>
-              </select>
+                onChange={handleLamaCicilan}>
+                    <option value={0} selected>
+                      Pilih Periode Cicilan
+                    </option>
+                    <option value={5}>5 Tahun</option>
+                    <option value={10}>10 Tahun</option>
+                    <option value={15}>15 Tahun</option>
+                    <option value={20}>20 Tahun</option>
+                  </select>
+                ) : pilihCicilan === "HHIT" ? (
+                  <select
+                class="form-select"
+                aria-label="Default select example"
+                onChange={handleLamaCicilan}>
+                    <option value={0} selected>
+                      Pilih Periode Cicilan
+                    </option>
+                    <option value={5}>5 Tahun</option>
+                  </select>
+                ) : pilihCicilan === "Kas Keras" ? (
+                  <select
+                class="form-select"
+                aria-label="Default select example"
+                onChange={handleLamaCicilan}>
+                    <option value={0} selected>
+                      Pilih Periode Cicilan
+                    </option>
+                    <option value={1}>1 Tahun</option>
+                  </select>
+                ) : <select
+                class="form-select"
+                aria-label="Default select example"
+                onChange={handleLamaCicilan}>
+                    <option value={0} selected>
+                      Pilih Periode Cicilan
+                    </option>
+                  </select>}
             </div>
           </div>
         </div>
@@ -187,44 +252,48 @@ const CicilanIdr = () => {
             <div className="mt-2 mb-2 text-wrapper d-flex justify-content-between">
               <div className="d-flex align-items-end">
                 <span className="text-rp">Rp</span>
-                <span className="text-price">{dp * hargaBeli}</span>
+                <span className="text-price">
+                  {numberWithCommas(Math.round(handleNan(cicilan)))}
+                </span>
               </div>
               <div className="d-flex align-items-end">
                 <span className="text-rp">Rp</span>
-                <span className="text-price">{Math.round(dp * hargaBeli)}</span>
+                <span className="text-price">
+                  {numberWithCommas(Math.round(dp * hargaBeli))}
+                </span>
               </div>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Lama Cicilan DP</p>
-              <p className="text-bold">{lamaCicilan} Tahun</p>
+              <p className="text-bold">{cicilDp} Tahun</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Cicilan DP</p>
               <div className="d-flex">
                 <p className="text-bold">
-                  {convertRupiah.convert((dp * hargaBeli) / lamaCicilan)}
+                  Rp {numberWithCommas(Math.round(cicilanBln))}
                 </p>
-                <p>/bulan</p>
+                <p> /bulan</p>
               </div>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Plafon Cicilan</p>
               <p className="text-bold">
-                {convertRupiah.convert(hargaBeli-(dp * hargaBeli))}
+                Rp {numberWithCommas(Math.round(hargaBeli - dp * hargaBeli))}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Bunga Cicilan</p>
-              <p className="text-bold">{bunga*100}%</p>
+              <p className="text-bold">{bunga * 100}%</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex">
               <p className="text-bold">Keterangan:</p>
-              <p className="ms-1">5 Tahun Fix Interest, setelah itu float</p>
+              <p className="ms-1">{tc}</p>
             </div>
           </div>
         </div>
