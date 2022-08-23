@@ -47,7 +47,7 @@ const CicilanIdr = () => {
     //   ? setBunga(8.75 / 100)
     //   : setBunga(0);
     pilihCicilan === 'BRI' ? setDiskon(0) : setDiskon(6/100)
-  });
+  },[hargaJual, pilihCicilan, tipeUnit]);
 
   return (
     <div className="container-md p-5">

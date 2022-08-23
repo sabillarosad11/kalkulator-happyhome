@@ -121,7 +121,7 @@ const InvestasiIdr = () => {
       }
     }
     console.log("keuntungan1", keuntungan1);
-    let totalKeuntungan1 = keuntungan1.reduce((a, b) => a + b, 0)
+    let totalKeuntungan1 = keuntungan1.reduce((a, b) => a + b, 0);
     console.log("totalKeuntungan1", totalKeuntungan1);
 
     let keuntungan2 = [];
@@ -214,7 +214,7 @@ const InvestasiIdr = () => {
     let totalUnit5 = unitDibeli5.reduce((a, b) => a + b, 0);
     console.log("totalUnit5", totalUnit5);
 
-    setTabelUntung1(totalKeuntungan1)
+    setTabelUntung1(totalKeuntungan1);
     setTabelUntung2(totalKeuntungan2);
     setTabelUntung3(totalKeuntungan3);
     setTabelUntung4(totalKeuntungan4);
@@ -224,12 +224,30 @@ const InvestasiIdr = () => {
     setTabelUnit3(totalUnit3);
     setTabelUnit4(totalUnit4);
     setTabelUnit5(totalUnit5);
-    setTotalKeuntungan(tabelUntung1+tabelUntung2+tabelUntung3+tabelUntung4+tabelUntung5);
-    setPersenUntung((totalKeuntungan / investasiAwal) * 100)
+    setTotalKeuntungan(
+      tabelUntung1 + tabelUntung2 + tabelUntung3 + tabelUntung4 + tabelUntung5
+    );
+    setPersenUntung((totalKeuntungan / investasiAwal) * 100);
     setApy((1 + persenUntung / 100) ** (1 / (periode / 12)) - 1);
-    setUntungPenjualan(hargaJual-hargaBeli)
-
-  });
+    setUntungPenjualan(hargaJual - hargaBeli);
+  }, [
+    tipeUnit,
+    hargaJual,
+    hargaBeli,
+    jumlah,
+    dp,
+    investasiAwal,
+    tabelUntung1,
+    tabelUntung2,
+    tabelUntung3,
+    tabelUntung4,
+    tabelUntung5,
+    totalKeuntungan,
+    persenUntung,
+    periode,
+    durasi,
+    check,
+  ]);
 
   return (
     <div className="container-md p-5">
