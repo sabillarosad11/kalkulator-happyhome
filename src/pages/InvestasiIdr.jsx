@@ -53,6 +53,17 @@ const InvestasiIdr = () => {
     setCheck(e.target.checked);
   };
 
+   function numberWithCommas(y) {
+     return y.toString().replace(/\B(?<!\.\d* )(?=(\d{3})+(?!\d))/g, ",");
+   }
+
+  function handleNan(x) {
+    if (isNaN(x)) {
+      return 0
+    }
+    return x;
+  }
+
   useEffect(() => {
     tipeUnit === "24/66"
       ? setHargaJual(200000000)
@@ -230,6 +241,8 @@ const InvestasiIdr = () => {
     setPersenUntung((totalKeuntungan / investasiAwal) * 100);
     setApy((1 + persenUntung / 100) ** (1 / (periode / 12)) - 1);
     setUntungPenjualan(hargaJual - hargaBeli);
+
+    console.log(typeof(hargaJual))
   }, [
     tipeUnit,
     hargaJual,
@@ -396,7 +409,9 @@ const InvestasiIdr = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Harga Jual</p>
-              <p className="text-bold">{convertRupiah.convert(hargaJual)}</p>
+              <p className="text-bold text-right">
+                Rp {numberWithCommas(Math.round(hargaJual))}
+              </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -406,40 +421,42 @@ const InvestasiIdr = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Harga Beli</p>
-              <p className="text-bold">{convertRupiah.convert(hargaBeli)}</p>
+              <p className="text-bold">
+                Rp {numberWithCommas(Math.round(hargaBeli))}
+              </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>DP</p>
-              <p className="text-bold">{convertRupiah.convert(dp)}</p>
+              <p className="text-bold">Rp {numberWithCommas(Math.round(dp))}</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Pelunasan HappyHomes</p>
               <p className="text-bold">
-                {convertRupiah.convert(hargaBeli - dp)}
+                Rp {numberWithCommas(Math.round(hargaBeli - dp))}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex flex-column align-items-center text-bold">
               <p>Keuntungan Penjualan</p>
               <p className="price-column">
-                {convertRupiah.convert(untungPenjualan)}
+                Rp {numberWithCommas(Math.round(untungPenjualan))}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between mb-4 text-bold">
               <div className="text-wrapper d-flex flex-column align-items-center">
-                <p>Keuntungan HHIT</p>
-                <p className="price-column">
-                  {convertRupiah.convert(untungPenjualan * (2 / 3))}
+                <p className="text-center">Keuntungan HHIT</p>
+                <p className="price-column text-center">
+                  Rp {numberWithCommas(Math.round(untungPenjualan * (2 / 3)))}
                 </p>
               </div>
               <div className="text-wrapper d-flex flex-column align-items-center">
-                <p>Keuntungan</p>
-                <p className="price-column">Investmen Buyer</p>
-                <p className="price-column">
-                  {convertRupiah.convert(untungPenjualan * (1 / 3))}
+                <p className="text-center">Keuntungan</p>
+                <p className="price-column text-center">Investmen Buyer</p>
+                <p className="price-column text-center">
+                  Rp {numberWithCommas(Math.round(untungPenjualan * (1 / 3)))}
                 </p>
               </div>
             </div>
@@ -460,35 +477,35 @@ const InvestasiIdr = () => {
               <tr className="border-row">
                 <td>1</td>
                 <td className="pink text-bold">
-                  {convertRupiah.convert(tabelUntung1)}
+                  Rp {numberWithCommas(Math.round(tabelUntung1))}
                 </td>
                 <td>{tabelUnit1}</td>
               </tr>
               <tr className="border-row">
                 <td>2</td>
                 <td className="pink text-bold">
-                  {convertRupiah.convert(tabelUntung2)}
+                  Rp {numberWithCommas(Math.round(tabelUntung2))}
                 </td>
                 <td>{tabelUnit2}</td>
               </tr>
               <tr className="border-row">
                 <td>3</td>
                 <td className="pink text-bold">
-                  {convertRupiah.convert(tabelUntung3)}
+                  Rp {numberWithCommas(Math.round(tabelUntung3))}
                 </td>
                 <td>{tabelUnit3}</td>
               </tr>
               <tr className="border-row">
                 <td>4</td>
                 <td className="pink text-bold">
-                  {convertRupiah.convert(tabelUntung4)}
+                  Rp {numberWithCommas(Math.round(tabelUntung4))}
                 </td>
                 <td>{tabelUnit4}</td>
               </tr>
               <tr className="border-radius">
                 <td>5</td>
                 <td className="pink text-bold">
-                  {convertRupiah.convert(tabelUntung5)}
+                  Rp {numberWithCommas(Math.round(tabelUntung5))}
                 </td>
                 <td>{tabelUnit5}</td>
               </tr>
@@ -500,24 +517,28 @@ const InvestasiIdr = () => {
             <div className="text-total">Total Keuntungan</div>
             <div className="d-flex align-items-end">
               <span className="text-rp">Rp</span>
-              <span className="text-price">{totalKeuntungan}</span>
+              <span className="text-price">
+                {numberWithCommas(Math.round(totalKeuntungan))}
+              </span>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Investasi Awal</p>
               <p className="text-bold">
-                {convertRupiah.convert(investasiAwal)}
+                Rp {numberWithCommas(Math.round(investasiAwal))}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>% Keuntungan</p>
-              <p className="text-bold">{Math.round(persenUntung)}%</p>
+              <p className="text-bold">
+                {handleNan(Math.round(persenUntung))}%
+              </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>APY</p>
-              <p className="text-bold">{Math.round(apy * 100)}%</p>
+              <p className="text-bold">{handleNan(Math.round(apy * 100))}%</p>
             </div>
           </div>
         </div>

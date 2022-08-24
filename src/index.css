@@ -202,6 +202,68 @@ tbody .border-radius .pink {
   min-height: 388px !important;
 }
 
+@media screen and (max-width: 420px){
+  h1 {
+    font-size: 18px;
+  }
+  .input-group label {
+    font-size: 16px;
+  }
+  label select option {
+    font-size: 14px;
+  }
+  input {
+    font-size: 14px;
+  }
+  .label-diskon{
+    margin-top: 5px !important;
+  }
+  .text-value-diskon {
+    font-size: 18px !important;
+  }
+  .card-detail {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .card-detail p {
+    font-size: 12px !important;
+  }
+  .text-right {
+    text-align: right;
+  }
+  table{
+    margin-bottom: 30px !important;
+  }
+  th,td {
+    font-size: 14px ;
+  }
+  .card-keuntungan .text-total {
+    font-size: 12px;
+  }
+  .card-keuntungan .text-rp {
+    font-size: 14px;
+    margin-bottom: -1px;
+  }
+  .card-keuntungan .text-price {
+    font-size: 18px;
+  }
+  .card-keuntungan p {
+    font-size: 12px;
+  }
+  .text-simulasi{
+    font-size: 16px;
+  }
+  .card-cicilan .text-rp {
+    font-size: 14px;
+  }
+  .card-cicilan .text-price{
+    font-size: 18px;
+  }
+  .card-cicilan p {
+    font-size: 12px;
+  }
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
