@@ -3,19 +3,23 @@ import React, {useState, useEffect, useMemo} from "react";
 const TheLeafPlatinum = () => {
     const types = useMemo(() => [{
             id: "1",
-            name: "30/60"
+            name: "Tipe 30/60",
+            value: "30/60"
         },
         {
             id: "2",
-            name: "33/60"
+            name: "Tipe 33/60",
+            value: "33/60"
         },
         {
             id: "3",
-            name: "32/70"
+            name: "Tipe 32/70",
+            value: "32/70"
         },
         {
             id: "4",
-            name: "42/80"
+            name: "Tipe 42/80",
+            value: "42/80"
         },
     ], []);
 
@@ -131,16 +135,16 @@ const TheLeafPlatinum = () => {
             setCicilan(plafonCicilan * (((r / 100) * (1 + (r / 100))) ^ n) / ((1 + (r / 100)) ^ (n - 1)));
     }, [payments, types, lamaCicilan, bunga, dp, hargaBeli])
   return (
-    <div className="container-md p-5">
+    <div className="container-sm contener">
       <div className="mb-4">
         <h1>Kalkulator Cicilan</h1>
         <span className="mb-4 text-simulasi">
           Simulasikan cicilan sewa dan cicilan KPR dengan mudah disini
         </span>
       </div>
-      <div className="row row-mb">
+      <div className="row row-mb gx-2">
         <div className="col-md-6">
-          <div className="input-group row">
+          <div className="input-group row ">
             <label for="inputPassword" className="col-sm-4 col-form-label">
               Tipe Rumah
             </label>
@@ -151,7 +155,7 @@ const TheLeafPlatinum = () => {
                   type && type !== undefined ?
                   type.map((t, index) => {
                     return (
-                      <option key={index} value={t.name}>{t.name}</option>
+                      <option key={index} value={t.value}>{t.name}</option>
                     )
                   }) : "No Type"
                 }
@@ -196,7 +200,7 @@ const TheLeafPlatinum = () => {
             </label>
             <div className="col-sm-8">
               <div className="row">
-                <div className="col-sm-7">
+                <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control grey"
@@ -260,7 +264,7 @@ const TheLeafPlatinum = () => {
                 <span className="text-rp">Rp</span>
                 <span className="text-price">
                   {
-                    numberWithCommas(Math.round(handleNan(dp * hargaBeli)))
+                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(dp * hargaBeli))) : 0
                   }
                 </span>
               </div>
@@ -268,7 +272,7 @@ const TheLeafPlatinum = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Lama Cicilan DP</p>
-              <p className="text-bold">{cicilDp} Tahun</p>
+              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined ? cicilDp : 0} Tahun</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -276,7 +280,7 @@ const TheLeafPlatinum = () => {
               <div className="d-flex">
                 <p className="text-bold">
                   Rp {
-                    numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp) / 12)))
+                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp) / 12))) : 0
                   }
                 </p>
                 <p> /bulan</p>
@@ -287,19 +291,19 @@ const TheLeafPlatinum = () => {
               <p>Plafon Cicilan</p>
               <p className="text-bold">
                 Rp {
-                  numberWithCommas(Math.round(handleNan(hargaBeli - (dp * hargaBeli))))
+                  lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(hargaBeli - (dp * hargaBeli)))) : 0
                 }
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Bunga Cicilan</p>
-              <p className="text-bold">{handleNan(bunga * 100)}%</p>
+              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined ? handleNan(bunga * 100): 0}%</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex">
               <p className="text-bold">Keterangan:</p>
-              <p className="ms-1">{tc}</p>
+              <p className="ms-1">{lamaCicilan && lamaCicilan !== undefined ? tc : 0}</p>
             </div>
           </div>
         </div>

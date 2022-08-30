@@ -1,7 +1,33 @@
-import React, { useEffect, useState } from "react";
-import convertRupiah from "rupiah-format";
+import React, { useEffect, useMemo, useState } from "react";
 
 const InvestasiIdr = () => {
+  const homes = useMemo(() => [
+    {id:"1", name:"The Leaf Mansion"},
+    {id:"2", name:"The Leaf Platinum"},
+    {id:"3", name:"The Leaf Residence"},
+  ],[])
+
+  const units = useMemo(() => [
+    {perumahanId:"1", name:"Cluster Fuschia 27/60", value:"27/60"},
+    {perumahanId:"1", name:"Cluster Adenium 27/60", value:"27/60"},
+    {perumahanId:"1", name:"Cluster Bougenville 33/72", value:"33/72"},
+    {perumahanId:"2", name:"Tipe 30/60", value:"30/60"},
+    {perumahanId:"2", name:"Tipe 33/60", value:"33/60"},
+    {perumahanId:"2", name:"Tipe 32/70", value:"32/70"},
+    {perumahanId:"3", name:"Cluster Adenium 27/60", value:"27/60"},
+    {perumahanId:"3", name:"Cluster Alamanda 24/66", value:"24/66"},
+    {perumahanId:"3", name:"Cluster Alamanda 24/72", value:"24/72"},
+    {perumahanId:"3", name:"Cluster Bougenville 33/72", value:"33/72R"},
+    {perumahanId:"3", name:"Cluster Dahlia 35/72", value:"35/72"},
+    {perumahanId:"3", name:"Cluster Dahlia 52/72", value:"52/72"},
+    {perumahanId:"3", name:"Cluster Fuschia 28/60", value:"28/60"},
+    {perumahanId:"3", name:"Cluster Gardenia 28/60", value:"28/60"},
+    {perumahanId:"3", name:"Cluster Gardenia 30/72", value:"30/72"},
+    {perumahanId:"3", name:"Cluster Gardenia 36/72", value:"36/72"},
+  ],[])
+
+  const [perumahan, setPerumahan] = useState([])
+  const [unit, setUnit] = useState([])
   const [jumlah, setJumlah] = useState(1);
   const [tipeUnit, setTipeUnit] = useState();
   const [hargaJual, setHargaJual] = useState();
@@ -27,6 +53,12 @@ const InvestasiIdr = () => {
   const [apy, setApy] = useState();
   const [untungPenjualan, setUntungPenjualan] = useState()
 
+  const handlePerumahan = (id) => {
+    console.log(id)
+    const dc = units.filter(x => x.perumahanId === id)
+    setUnit(dc)
+  }
+  
   const handlePlus = () => {
     setJumlah(jumlah + 1);
   };
@@ -65,12 +97,35 @@ const InvestasiIdr = () => {
   }
 
   useEffect(() => {
-    tipeUnit === "24/66"
-      ? setHargaJual(200000000)
-      : tipeUnit === "27/60"
-      ? setHargaJual(230000000)
+    setPerumahan(homes);
+    tipeUnit === "27/60"
+      ? setHargaJual(220000000)
       : tipeUnit === "33/72"
-      ? setHargaJual(300000000)
+      ? setHargaJual(285000000)
+      : tipeUnit === "30/60"
+      ? setHargaJual(189000000)
+      : tipeUnit === "33/60" 
+      ? setHargaJual(189000000)
+      : tipeUnit === "32/70" 
+      ? setHargaJual(250000000)
+      : tipeUnit === "27/60" 
+      ? setHargaJual(220000000)
+      : tipeUnit === "24/66" 
+      ? setHargaJual(305000000)
+      : tipeUnit === "24/72" 
+      ? setHargaJual(322000000)
+      : tipeUnit === "33/72R" 
+      ? setHargaJual(349000000)
+      : tipeUnit === "35/72" 
+      ? setHargaJual(339000000)
+      : tipeUnit === "52/72" 
+      ? setHargaJual(449000000)
+      : tipeUnit === "28/60" 
+      ? setHargaJual(168000000)
+      : tipeUnit === "30/72" 
+      ? setHargaJual(323000000)
+      : tipeUnit === "36/72" 
+      ? setHargaJual(333000000)
       : setHargaJual(0);
 
     setHargaBeli((1 - 12 / 100) * hargaJual);
@@ -85,7 +140,7 @@ const InvestasiIdr = () => {
         durasiArray.push(i);
       }
     }
-    console.log("bulan", durasiArray);
+    // console.log("bulan", durasiArray);
 
     let hargaUnitInvestasi = [];
     for (let i = 0; i < durasiArray.length; i++) {
@@ -97,7 +152,7 @@ const InvestasiIdr = () => {
         )
       );
     }
-    console.log("harga unit investasi", hargaUnitInvestasi);
+    // console.log("harga unit investasi", hargaUnitInvestasi);
 
     let dataLain = [investasiAwal];
     let unitDibeli = [];
@@ -121,9 +176,9 @@ const InvestasiIdr = () => {
         }
       }
     }
-    console.log("unit dibeli", unitDibeli);
-    console.log("keuntungan", keuntungan);
-    console.log("data lain", dataLain);
+    // console.log("unit dibeli", unitDibeli);
+    // console.log("keuntungan", keuntungan);
+    // console.log("data lain", dataLain);
 
     let keuntungan1 = [];
     for (let i = 0; i < keuntungan.length; i++) {
@@ -133,7 +188,7 @@ const InvestasiIdr = () => {
     }
     console.log("keuntungan1", keuntungan1);
     let totalKeuntungan1 = keuntungan1.reduce((a, b) => a + b, 0);
-    console.log("totalKeuntungan1", totalKeuntungan1);
+    // console.log("totalKeuntungan1", totalKeuntungan1);
 
     let keuntungan2 = [];
     for (let i = 0; i < keuntungan.length; i++) {
@@ -143,7 +198,7 @@ const InvestasiIdr = () => {
     }
     console.log("keuntungan2", keuntungan2);
     let totalKeuntungan2 = keuntungan2.reduce((a, b) => a + b, 0);
-    console.log("totalKeuntungan2", totalKeuntungan2);
+    // console.log("totalKeuntungan2", totalKeuntungan2);
 
     let keuntungan3 = [];
     for (let i = 0; i < keuntungan.length; i++) {
@@ -153,7 +208,7 @@ const InvestasiIdr = () => {
     }
     console.log("keuntungan3", keuntungan3);
     let totalKeuntungan3 = keuntungan3.reduce((a, b) => a + b, 0);
-    console.log("totalKeuntungan3", totalKeuntungan3);
+    // console.log("totalKeuntungan3", totalKeuntungan3);
 
     let keuntungan4 = [];
     for (let i = 0; i < keuntungan.length; i++) {
@@ -163,7 +218,7 @@ const InvestasiIdr = () => {
     }
     console.log("keuntungan4", keuntungan4);
     let totalKeuntungan4 = keuntungan4.reduce((a, b) => a + b, 0);
-    console.log("totalKeuntungan4", totalKeuntungan4);
+    // console.log("totalKeuntungan4", totalKeuntungan4);
 
     let keuntungan5 = [];
     for (let i = 0; i < keuntungan.length; i++) {
@@ -171,9 +226,9 @@ const InvestasiIdr = () => {
         keuntungan5.push(keuntungan[i]);
       }
     }
-    console.log("keuntungan5", keuntungan5);
+    // console.log("keuntungan5", keuntungan5);
     let totalKeuntungan5 = keuntungan5.reduce((a, b) => a + b, 0);
-    console.log("totalKeuntungan5", totalKeuntungan5);
+    // console.log("totalKeuntungan5", totalKeuntungan5);
 
     let unitDibeli1 = [];
     for (let i = 0; i < unitDibeli.length; i++) {
@@ -181,9 +236,9 @@ const InvestasiIdr = () => {
         unitDibeli1.push(unitDibeli[i]);
       }
     }
-    console.log("unitDibeli1", unitDibeli1);
+    // console.log("unitDibeli1", unitDibeli1);
     let totalUnit1 = unitDibeli1.reduce((a, b) => a + b, 0);
-    console.log("totalUnit1", totalUnit1);
+    // console.log("totalUnit1", totalUnit1);
 
     let unitDibeli2 = [];
     for (let i = 0; i < unitDibeli.length; i++) {
@@ -193,7 +248,7 @@ const InvestasiIdr = () => {
     }
     console.log("unitDibeli2", unitDibeli2);
     let totalUnit2 = unitDibeli2.reduce((a, b) => a + b, 0);
-    console.log("totalUnit2", totalUnit2);
+    // console.log("totalUnit2", totalUnit2);
 
     let unitDibeli3 = [];
     for (let i = 0; i < unitDibeli.length; i++) {
@@ -203,7 +258,7 @@ const InvestasiIdr = () => {
     }
     console.log("unitDibeli3", unitDibeli3);
     let totalUnit3 = unitDibeli3.reduce((a, b) => a + b, 0);
-    console.log("totalUnit3", totalUnit3);
+    // console.log("totalUnit3", totalUnit3);
 
     let unitDibeli4 = [];
     for (let i = 0; i < unitDibeli.length; i++) {
@@ -213,7 +268,7 @@ const InvestasiIdr = () => {
     }
     console.log("unitDibeli4", unitDibeli4);
     let totalUnit4 = unitDibeli4.reduce((a, b) => a + b, 0);
-    console.log("totalUnit4", totalUnit4);
+    // console.log("totalUnit4", totalUnit4);
 
     let unitDibeli5 = [];
     for (let i = 0; i < unitDibeli.length; i++) {
@@ -223,7 +278,7 @@ const InvestasiIdr = () => {
     }
     console.log("unitDibeli5", unitDibeli5);
     let totalUnit5 = unitDibeli5.reduce((a, b) => a + b, 0);
-    console.log("totalUnit5", totalUnit5);
+    // console.log("totalUnit5", totalUnit5);
 
     setTabelUntung1(totalKeuntungan1);
     setTabelUntung2(totalKeuntungan2);
@@ -259,16 +314,38 @@ const InvestasiIdr = () => {
     persenUntung,
     periode,
     durasi,
-    check,
+    check,homes,units
   ]);
 
   return (
-    <div className="container-md p-5">
+    <div className="container-sm contener">
       <div className="mb-4">
         <h1>Kalkulator Investasi</h1>
       </div>
-      <div className="row row-mb">
+      <div className="row row-mb gx-2"> 
         <div className="col-sm-6">
+          <div className="input-group row">
+            <label for="inputPassword" className="col-sm-4 col-form-label">
+              Perumahan
+            </label>
+            <div className="col-sm-8">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                onChange={(e) => handlePerumahan(e.target.value)}
+              >
+                <option selected>Pilih Perumahan</option>
+                {
+                  perumahan && perumahan !== undefined ?
+                  perumahan.map((p, index) => {
+                    return(
+                      <option key={index} value={p.id}>{p.name}</option>
+                    )
+                  }) : "No Perumahan"
+                }
+              </select>
+            </div>
+          </div>
           <div className="input-group row">
             <label for="inputPassword" className="col-sm-4 col-form-label">
               Tipe Unit
@@ -280,9 +357,14 @@ const InvestasiIdr = () => {
                 onChange={handleUnit}
               >
                 <option selected>Pilih Tipe Unit</option>
-                <option>24/66</option>
-                <option>27/60</option>
-                <option>33/72</option>
+                {
+                  unit && unit !== undefined ? 
+                  unit.map((u, index) => {
+                    return(
+                      <option key={index} value={u.value}>{u.name}</option>
+                    )
+                  }) : "No Data"
+                }
               </select>
             </div>
           </div>
@@ -295,7 +377,9 @@ const InvestasiIdr = () => {
                 type="text"
                 className="form-control grey"
                 id="inputPassword"
-                value={convertRupiah.convert(hargaJual)}
+                value = {
+                  `Rp ${numberWithCommas(Math.round(hargaJual))}`
+                }
                 disabled
               />
             </div>
@@ -306,16 +390,18 @@ const InvestasiIdr = () => {
             </label>
             <div className="col-sm-8">
               <div className="row">
-                <div className="col-sm-7">
+                <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control grey"
                     id="inputPassword"
-                    value={convertRupiah.convert(hargaBeli)}
+                    value = {
+                      `Rp ${numberWithCommas(Math.round(hargaBeli))}`
+                    }
                     disabled
                   />
                 </div>
-                <div className="col-sm-4">
+                <div className="col-md-4">
                   <label
                     for="inputPassword"
                     className="col-form-label label-diskon"
@@ -410,38 +496,38 @@ const InvestasiIdr = () => {
             <div className="text-wrapper d-flex justify-content-between">
               <p>Harga Jual</p>
               <p className="text-bold text-right">
-                Rp {numberWithCommas(Math.round(hargaJual))}
+                Rp {periode && durasi ? numberWithCommas(Math.round(hargaJual)) : 0}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Diskon</p>
-              <p className="text-bold">12.00%</p>
+              <p className="text-bold">{periode && durasi ? 12.00 : 0}%</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Harga Beli</p>
               <p className="text-bold">
-                Rp {numberWithCommas(Math.round(hargaBeli))}
+                Rp {periode && durasi ? numberWithCommas(Math.round(hargaBeli)) : 0}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>DP</p>
-              <p className="text-bold">Rp {numberWithCommas(Math.round(dp))}</p>
+              <p className="text-bold">Rp {periode && durasi ? numberWithCommas(Math.round(dp)) : 0}</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Pelunasan HappyHomes</p>
               <p className="text-bold">
-                Rp {numberWithCommas(Math.round(hargaBeli - dp))}
+                Rp {periode && durasi ? numberWithCommas(Math.round(hargaBeli - dp)) : 0}
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex flex-column align-items-center text-bold">
               <p>Keuntungan Penjualan</p>
               <p className="price-column">
-                Rp {numberWithCommas(Math.round(untungPenjualan))}
+                Rp {periode && durasi ? numberWithCommas(Math.round(untungPenjualan)) : 0}
               </p>
             </div>
             <hr />
@@ -449,14 +535,14 @@ const InvestasiIdr = () => {
               <div className="text-wrapper d-flex flex-column align-items-center">
                 <p className="text-center">Keuntungan HHIT</p>
                 <p className="price-column text-center">
-                  Rp {numberWithCommas(Math.round(untungPenjualan * (2 / 3)))}
+                  Rp {periode && durasi ? numberWithCommas(Math.round(untungPenjualan * (2 / 3))) : 0}
                 </p>
               </div>
               <div className="text-wrapper d-flex flex-column align-items-center">
                 <p className="text-center">Keuntungan</p>
                 <p className="price-column text-center">Investmen Buyer</p>
                 <p className="price-column text-center">
-                  Rp {numberWithCommas(Math.round(untungPenjualan * (1 / 3)))}
+                  Rp {periode && durasi ? numberWithCommas(Math.round(untungPenjualan * (1 / 3))) : 0}
                 </p>
               </div>
             </div>
@@ -525,7 +611,7 @@ const InvestasiIdr = () => {
             <div className="text-wrapper d-flex justify-content-between">
               <p>Investasi Awal</p>
               <p className="text-bold">
-                Rp {numberWithCommas(Math.round(investasiAwal))}
+                Rp {periode && durasi ? numberWithCommas(Math.round(investasiAwal)) : 0}
               </p>
             </div>
             <hr />

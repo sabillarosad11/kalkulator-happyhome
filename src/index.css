@@ -1,47 +1,58 @@
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+.contener {
+  padding-left: 6rem !important;
+  padding-right: 9rem !important;
+  padding-top: 2rem !important;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 24px !important;
   font-weight: bold !important;
 }
 
 input:focus {
-  box-shadow:  0 0 2pt 0.4pt #FF6464!important;
-  border: #FF6464;
+  box-shadow: 0 0 2pt 0.4pt #ff6464 !important;
+  border: #ff6464;
 }
 
 select:focus {
-  box-shadow:  0 0 2pt 0.4pt #FF6464!important;
-  border: #FF6464;
+  box-shadow: 0 0 2pt 0.4pt #ff6464 !important;
+  border: #ff6464;
 }
 
 .input-group {
-  margin-bottom: 32px;
+  margin-bottom: 28px !important;
 }
 
 .input-group .label-diskon {
   margin-top: -10px;
-} 
+}
 
 .grey {
-  background-color: #F1F1F1 !important;
+  background-color: #f1f1f1 !important;
+}
+
+.label-diskon {
+  margin-left: -20px;
+  margin-top: -4px !important;
 }
 
 .input-group label .text-diskon {
-  font-size: 14px;
-  color: #FF6464;
+  font-size: 12px;
+  color: #ff6464;
 }
 
 .input-group label .text-value-diskon {
-  font-size: 24px;
-  color: #FF6464;
+  font-size: 16px;
+  color: #ff6464;
 }
 
 .counter input {
@@ -57,23 +68,22 @@ select:focus {
 }
 
 .counter .minus {
-  border-top-left-radius: .375rem;
-  border-bottom-left-radius: .375rem;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
 }
 
 .counter .plus {
-  border-top-right-radius: .375rem;
-  border-bottom-right-radius: .375rem;
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
 }
 
 .form-check-input {
   width: 30px !important;
   height: 30px !important;
-  background-color: #FF6464 !important;
-  border: 1px solid #FF6464 !important;
+  background-color: #ff6464 !important;
+  border: 1px solid #ff6464 !important;
   /* background-color: white !important; */
 }
-
 
 .card {
   border: none !important;
@@ -81,10 +91,9 @@ select:focus {
 
 .card-detail {
   min-height: 445px !important;
-  background: linear-gradient(to right,#FF8C8C, #FF6464);
+  background: linear-gradient(to right, #ff8c8c, #ff6464);
   padding: 0 30px;
   color: white;
-  
 }
 
 .row-mb {
@@ -97,7 +106,7 @@ select:focus {
 
 .card-detail hr {
   border: 1px solid white;
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .card-detail .text-wrapper {
@@ -123,10 +132,11 @@ thead .pink {
 }
 
 .table .pink {
-  background-color: #FFF0F0 !important;
+  background-color: #fff0f0 !important;
 }
 
-th, td {
+th,
+td {
   text-align: center;
   font-size: 18px;
 }
@@ -134,7 +144,6 @@ th, td {
 tbody .border-row {
   border-bottom-width: 1px;
 }
-
 
 tbody .border-radius .pink {
   border-bottom-left-radius: 16px;
@@ -149,13 +158,13 @@ tbody .border-radius .pink {
 
 .card-keuntungan .text-total {
   font-size: 14px;
-  color: #FF6464;
+  color: #ff6464;
   margin-bottom: 4px;
 }
 
 .card-keuntungan .text-rp {
   font-size: 16px;
-  color: #FF6464;
+  color: #ff6464;
   font-weight: 700;
   margin-right: 10px;
   padding-bottom: 4px;
@@ -163,19 +172,18 @@ tbody .border-radius .pink {
 
 .card-keuntungan .text-price {
   font-size: 24px;
-  color: #FF6464;
+  color: #ff6464;
   font-weight: 700;
 }
 
 .card-keuntungan hr {
-  border: 1px solid #FF6464;
+  border: 1px solid #ff6464;
 }
 
-.card-keuntungan .text-wrapper{
-  color: #FF6464;
+.card-keuntungan .text-wrapper {
+  color: #ff6464;
   font-size: 14px;
   margin-bottom: -20px;
-
 }
 
 .card-detail .text-rp {
@@ -193,8 +201,8 @@ tbody .border-radius .pink {
 }
 
 .text-simulasi {
-  color: #707683;
-  font-size: 16px;
+  color: #707683 !important;
+  font-size: 16px !important;
   font-weight: 400;
 }
 
@@ -202,10 +210,26 @@ tbody .border-radius .pink {
   min-height: 388px !important;
 }
 
-@media screen and (max-width: 420px){
-  h1 {
-    font-size: 18px;
+@media screen and (max-width: 420px) {
+  .contener {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-top: 0rem;
   }
+
+  .label-diskon {
+    margin-left: 0.2rem;
+    margin-top: -4px !important;
+  }
+
+  h1 {
+    font-size: 18px !important;
+  }
+
+  .input-group {
+    width: auto !important;
+  }
+  
   .input-group label {
     font-size: 16px;
   }
@@ -215,7 +239,7 @@ tbody .border-radius .pink {
   input {
     font-size: 14px;
   }
-  .label-diskon{
+  .label-diskon {
     margin-top: 5px !important;
   }
   .text-value-diskon {
@@ -231,11 +255,12 @@ tbody .border-radius .pink {
   .text-right {
     text-align: right;
   }
-  table{
+  table {
     margin-bottom: 30px !important;
   }
-  th,td {
-    font-size: 14px ;
+  th,
+  td {
+    font-size: 14px;
   }
   .card-keuntungan {
     padding-right: 12px;
@@ -254,13 +279,13 @@ tbody .border-radius .pink {
   .card-keuntungan p {
     font-size: 12px;
   }
-  .text-simulasi{
-    font-size: 16px;
+  .text-simulasi {
+    font-size: 14px !important;
   }
   .card-cicilan .text-rp {
     font-size: 14px;
   }
-  .card-cicilan .text-price{
+  .card-cicilan .text-price {
     font-size: 18px;
   }
   .card-cicilan p {
@@ -269,6 +294,6 @@ tbody .border-radius .pink {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
