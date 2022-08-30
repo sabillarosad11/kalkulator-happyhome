@@ -7,11 +7,35 @@ const TheLeafResidence = () => {
     },
     {
       id: "2",
-      name: "33/72"
+      name: "24/66"
     },
     {
       id: "3",
-      name: "45/98"
+      name: "24/72"
+    },
+    {
+        id: "4",
+        name: "33/72"
+    },
+    {
+        id: "5",
+        name: "35/72"
+    },
+    {
+        id: "6",
+        name: "52/72"
+    },
+    {
+        id: "7",
+        name: "28/60"
+    },
+    {
+        id: "8",
+        name: "30/72"
+    },
+    {
+        id: "9",
+        name: "36/72"
     },
   ], []);
 
@@ -54,7 +78,7 @@ const TheLeafResidence = () => {
   const [cicilan, setCicilan] = useState();
 
   const handleUnit = (e) => {
-    e.target.value === "27/60" ? setHargaJual(220000000) : e.target.value === "33/72" ? setHargaJual(285000000) : e.target.value === "45/98" ? setHargaJual(350000000) : setHargaJual("No Price")
+    e.target.value === "27/60" ? setHargaJual(220000000) : e.target.value === "24/66" ? setHargaJual(305000000) : e.target.value === "24/72" ? setHargaJual(322000000) : e.target.value === "33/72" ? setHargaJual(349000000) : e.target.value === "35/72" ? setHargaJual(339000000) : e.target.value === "52/72" ? setHargaJual(449000000) : e.target.value === "28/60" ? setHargaJual(168000000) : e.target.value === "30/72" ? setHargaJual(323000000) : e.target.value === "36/72" ? setHargaJual(333000000) : setHargaJual("No Price")
   };
 
   const handleCicilan = (id) => {
@@ -62,7 +86,7 @@ const TheLeafResidence = () => {
     setPilihCicilan(dc)
     setHargaBeli(id === "1" ? hargaJual / (1 + (6 / 100)) : id === "2" ? hargaJual / (1 + (6 / 100)) : id === "3" ? hargaJual / 1 : 0);
     setTextCicilan(id === "1"?"Kas Keras": id === "2"?"HHIT": id === "3"?"BRI": "");
-    setDp(id === "1" ? 5 / 100 : id === "2" ? 33.333333333 / 100 : 0);
+    setDp(id === "1" ? 5 / 100 : id === "2" ? 33.333333333 / 100 : id === "3" ? 1/100 : 0);
     setCicilDp(id === "1" ? 3 : id === "2" ? 1 : id === "3" ? 6 : 0);
     setBunga(id === "1" ? 0 : id === "2" ? 6/100 : id === "3" ? 8.75/100 : 0);
     setTc(id === "1" ? "Dicicil 1 Tahun" : id === "2" ? "Max 5 Tahun" : id === "3" ? "5 Tahun Fix Interest, setelah itu float" : "");

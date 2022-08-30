@@ -95,7 +95,7 @@ const TheLeafPlatinum = () => {
         setPilihCicilan(dc)
         setHargaBeli(id === "1" ? hargaJual / (1 + (6 / 100)) : id === "2" ? hargaJual / (1 + (6 / 100)) : id === "3" ? hargaJual / 1 : 0);
         setTextCicilan(id === "1" ? "Kas Keras" : id === "2" ? "HHIT" : id === "3" ? "BRI" : "");
-        setDp(id === "1" ? 5 / 100 : id === "2" ? 33.333333333 / 100 : 0);
+        setDp(id === "1" ? 5 / 100 : id === "2" ? 33.333333333 / 100 : id === "3" ? 1/100 : 0);
         setCicilDp(id === "1" ? 3 : id === "2" ? 1 : id === "3" ? 6 : 0);
         setBunga(id === "1" ? 0 : id === "2" ? 6 / 100 : id === "3" ? 8.75 / 100 : 0);
         setTc(id === "1" ? "Dicicil 1 Tahun" : id === "2" ? "Max 5 Tahun" : id === "3" ? "5 Tahun Fix Interest, setelah itu float" : "");
