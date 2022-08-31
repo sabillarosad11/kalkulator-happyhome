@@ -3,39 +3,53 @@ import React, {useState, useEffect, useMemo} from "react";
 const TheLeafResidence = () => {
     const types = useMemo(() => [{
       id: "1",
-      name: "27/60"
+      value: "27/60",
+      name: "Cluster Adenium 27/60"
     },
     {
       id: "2",
-      name: "24/66"
+      value: "24/66",
+      name: "Cluster Alamanda 24/66"
     },
     {
       id: "3",
-      name: "24/72"
+      value: "24/72",
+      name: "Cluster Alamanda 24/72"
     },
     {
         id: "4",
-        name: "33/72"
+        value: "33/72",
+        name: "Cluster Bougenville 33/72"
     },
     {
         id: "5",
-        name: "35/72"
+        value: "35/72",
+        name: "Cluster Dahlia 35/72"
     },
     {
         id: "6",
-        name: "52/72"
+        value: "52/72",
+        name: "Cluster Dahlia 52/72"
     },
     {
         id: "7",
-        name: "28/60"
+        value: "28/60",
+        name: "Cluster Fuschia 28/60"
     },
     {
-        id: "8",
-        name: "30/72"
+      id: "8",
+      value: "28/60",
+      name: "Cluster Gardenia 28/60"
     },
     {
         id: "9",
-        name: "36/72"
+        value: "30/72",
+        name: "Cluster Gardenia 30/72"
+    },
+    {
+        id: "10",
+        value: "36/72",
+        name: "Cluster Gardenia 36/72"
     },
   ], []);
 
@@ -122,16 +136,16 @@ const TheLeafResidence = () => {
       setCicilan(plafonCicilan * (((r / 100) * (1 + (r / 100))) ^ n) / ((1 + (r / 100)) ^ (n - 1)));
   },[payments, types, lamaCicilan, bunga, dp, hargaBeli])
   return (
-    <div className="container-md p-5">
+    <div className="container-sm contener">
       <div className="mb-4">
         <h1>Kalkulator Cicilan</h1>
         <span className="mb-4 text-simulasi">
           Simulasikan cicilan sewa dan cicilan KPR dengan mudah disini
         </span>
       </div>
-      <div className="row row-mb">
+      <div className="row row-mb gx-2">
         <div className="col-md-6">
-          <div className="input-group row">
+          <div className="input-group row ">
             <label for="inputPassword" className="col-sm-4 col-form-label">
               Tipe Rumah
             </label>
@@ -142,7 +156,7 @@ const TheLeafResidence = () => {
                   type && type !== undefined ?
                   type.map((t, index) => {
                     return (
-                      <option key={index} value={t.name}>{t.name}</option>
+                      <option key={index} value={t.value}>{t.name}</option>
                     )
                   }) : "No Type"
                 }
@@ -187,7 +201,7 @@ const TheLeafResidence = () => {
             </label>
             <div className="col-sm-8">
               <div className="row">
-                <div className="col-sm-7">
+                <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control grey"
@@ -251,7 +265,7 @@ const TheLeafResidence = () => {
                 <span className="text-rp">Rp</span>
                 <span className="text-price">
                   {
-                    numberWithCommas(Math.round(handleNan(dp * hargaBeli)))
+                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(dp * hargaBeli))) : 0
                   }
                 </span>
               </div>
@@ -259,7 +273,7 @@ const TheLeafResidence = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Lama Cicilan DP</p>
-              <p className="text-bold">{cicilDp} Tahun</p>
+              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined ? cicilDp : 0} Tahun</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -267,7 +281,7 @@ const TheLeafResidence = () => {
               <div className="d-flex">
                 <p className="text-bold">
                   Rp {
-                    numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp) / 12)))
+                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp) / 12))) : 0
                   }
                 </p>
                 <p> /bulan</p>
@@ -278,19 +292,19 @@ const TheLeafResidence = () => {
               <p>Plafon Cicilan</p>
               <p className="text-bold">
                 Rp {
-                  numberWithCommas(Math.round(handleNan(hargaBeli - (dp * hargaBeli))))
+                  lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(hargaBeli - (dp * hargaBeli)))) : 0
                 }
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Bunga Cicilan</p>
-              <p className="text-bold">{handleNan(bunga * 100)}%</p>
+              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined ? handleNan(bunga * 100): 0}%</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex">
               <p className="text-bold">Keterangan:</p>
-              <p className="ms-1">{tc}</p>
+              <p className="ms-1">{lamaCicilan && lamaCicilan !== undefined ? tc : 0}</p>
             </div>
           </div>
         </div>
