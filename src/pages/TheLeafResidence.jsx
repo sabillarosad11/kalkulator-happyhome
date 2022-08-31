@@ -133,7 +133,7 @@ const TheLeafResidence = () => {
     // console.log('n', n)
     r === 0 ?
       setCicilan(plafonCicilan / n) :
-      setCicilan(plafonCicilan * (((r / 100) * (1 + (r / 100))) ^ n) / ((1 + (r / 100)) ^ (n - 1)));
+      setCicilan(plafonCicilan * (r/100 * (1 + (r/100))**n)/((1+(r/100))** n-1));
   },[payments, types, lamaCicilan, bunga, dp, hargaBeli])
   return (
     <div className="container-sm contener">
