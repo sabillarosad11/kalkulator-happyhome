@@ -8,22 +8,22 @@ const CicilanIdr = () => {
   ],[])
 
   const units = useMemo(() => [
-    {perumahanId:"1", name:"Cluster Fuschia 27/60", value:"27/60"},
-    {perumahanId:"1", name:"Cluster Adenium 27/60", value:"27/60"},
-    {perumahanId:"1", name:"Cluster Bougenville 33/72", value:"33/72"},
-    {perumahanId:"2", name:"Tipe 30/60", value:"30/60"},
-    {perumahanId:"2", name:"Tipe 33/60", value:"33/60"},
-    {perumahanId:"2", name:"Tipe 32/70", value:"32/70"},
-    {perumahanId:"3", name:"Cluster Adenium 27/60", value:"27/60"},
-    {perumahanId:"3", name:"Cluster Alamanda 24/66", value:"24/66"},
-    {perumahanId:"3", name:"Cluster Alamanda 24/72", value:"24/72"},
-    {perumahanId:"3", name:"Cluster Bougenville 33/72", value:"33/72R"},
-    {perumahanId:"3", name:"Cluster Dahlia 35/72", value:"35/72"},
-    {perumahanId:"3", name:"Cluster Dahlia 52/72", value:"52/72"},
-    {perumahanId:"3", name:"Cluster Fuschia 28/60", value:"28/60"},
-    {perumahanId:"3", name:"Cluster Gardenia 28/60", value:"28/60"},
-    {perumahanId:"3", name:"Cluster Gardenia 30/72", value:"30/72"},
-    {perumahanId:"3", name:"Cluster Gardenia 36/72", value:"36/72"},
+    {perumahanId:"1", name:"Cluster Fuschia 27/60", value:"27/60F", metode:["HHIT"]},
+    {perumahanId:"1", name:"Cluster Adenium 27/60", value:"27/60A", metode:["HHIT"]},
+    {perumahanId:"1", name:"Cluster Bougenville 33/72", value:"33/72", metode:["HHIT"]},
+    {perumahanId:"2", name:"Tipe 30/60", value:"30/60", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"2", name:"Tipe 33/60", value:"33/60", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"2", name:"Tipe 32/70", value:"32/70", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Adenium 27/60", value:"27/60A", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Alamanda 24/66", value:"24/66", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Alamanda 24/72", value:"24/72", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Bougenville 33/72", value:"33/72R", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Dahlia 35/72", value:"35/72", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Dahlia 52/72", value:"52/72", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Fuschia 28/60", value:"28/60F", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Gardenia 28/60", value:"28/60G", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Gardenia 30/72", value:"30/72", metode:["Kas Keras", "HHIT", "BRI"]},
+    {perumahanId:"3", name:"Cluster Gardenia 36/72", value:"36/72", metode:["Kas Keras", "HHIT", "BRI"]},
   ],[])
 
   const payments = useMemo(() => [{
@@ -42,50 +42,51 @@ const CicilanIdr = () => {
 
   const instalment = [{
       id: "1",
-      paymentsId: "1",
+      paymentsId: "Kas Keras",
       name: "1 Tahun",
       value: 1
     },
     {
       id: "2",
-      paymentsId: "2",
+      paymentsId: "HHIT",
       name: "5 Tahun",
       value: 5
     },
     {
       id: "3",
-      paymentsId: "3",
+      paymentsId: "BRI",
       name: "5 Tahun",
       value: 5
     },
     {
       id: "4",
-      paymentsId: "3",
+      paymentsId: "BRI",
       name: "10 Tahun",
       value: 10
     },
     {
       id: "5",
-      paymentsId: "3",
+      paymentsId: "BRI",
       name: "15 Tahun",
       value: 15
     },
     {
       id: "6",
-      paymentsId: "3",
+      paymentsId: "BRI",
       name: "20 Tahun",
       value: 20
     },
     {
       id: "7",
-      paymentsId: "3",
+      paymentsId: "BRI",
       name: "25 Tahun",
       value: 25
     },
   ]
 
   const [perumahan, setPerumahan] = useState([])
-  const [unit, setUnit] = useState([])
+  const [unit, setUnit] = useState([]);
+  const [unitId, setUnitId] = useState();
   const [hargaJual, setHargaJual] = useState();
   const [payment, setPayment] = useState([]);
   const [pilihCicilan, setPilihCicilan] = useState([]);
@@ -97,16 +98,21 @@ const CicilanIdr = () => {
   const [tc, setTc] = useState();
   const [lamaCicilan, setLamaCicilan] = useState();
   const [cicilan, setCicilan] = useState();
+  const [diskon, setDiskon] = useState();
+  
 
   const handlePerumahan = (id) => {
     console.log(id)
+    setUnitId(id)
     const dc = units.filter(x => x.perumahanId === id)
     setUnit(dc)
   }
 
   const handleUnit = (e) => {
-    e.target.value === "27/60" ?
+    e.target.value === "27/60F" ?
       setHargaJual(220000000) :
+      e.target.value === "27/60A" ?
+        setHargaJual(220000000) :
       e.target.value === "33/72" ?
       setHargaJual(285000000) :
       e.target.value === "30/60" ?
@@ -127,24 +133,31 @@ const CicilanIdr = () => {
       setHargaJual(339000000) :
       e.target.value === "52/72" ?
       setHargaJual(449000000) :
-      e.target.value === "28/60" ?
+      e.target.value === "28/60F" ?
+      setHargaJual(168000000) :
+      e.target.value === "28/60G" ?
       setHargaJual(168000000) :
       e.target.value === "30/72" ?
       setHargaJual(323000000) :
       e.target.value === "36/72" ?
       setHargaJual(333000000) :
       setHargaJual(0);
+
+      const py = units.filter(x => x.value === e.target.value);
+      const xy = py.filter(x => x.perumahanId === unitId);
+      setPayment(xy[0].metode);
   };
 
   const handleCicilan = (id) => {
     const dc = instalment.filter(x => x.paymentsId === id)
     setPilihCicilan(dc)
-    setHargaBeli(id === "1" ? hargaJual / (1 + (6 / 100)) : id === "2" ? hargaJual / (1 + (6 / 100)) : id === "3" ? hargaJual / 1 : 0);
-    setTextCicilan(id === "1" ? "Kas Keras" : id === "2" ? "HHIT" : id === "3" ? "BRI" : "");
-    setDp(id === "1" ? 5 / 100 : id === "2" ? 33.333333333 / 100 : id === "3" ? 1 / 100 : 0);
-    setCicilDp(id === "1" ? 3 : id === "2" ? 1 : id === "3" ? 6 : 0);
-    setBunga(id === "1" ? 0 : id === "2" ? 6 / 100 : id === "3" ? 8.75 / 100 : 0);
-    setTc(id === "1" ? "Dicicil 1 Tahun" : id === "2" ? "Max 5 Tahun" : id === "3" ? "5 Tahun Fix Interest, setelah itu float" : "");
+    setHargaBeli(id === "Kas Keras" ? (hargaJual*(1+(6/100))) / (1 + (6 / 100)) : id === "HHIT" ? (hargaJual*(1+(6/100))) / (1 + (6 / 100)) : id === "BRI" ? (hargaJual*(1+(6/100))) / 1 : 0);
+    setTextCicilan(id === "Kas Keras" ? "Kas Keras" : id === "HHIT" ? "HHIT" : id === "BRI" ? "BRI" : "");
+    setDp(id === "Kas Keras" ? 5 / 100 : id === "HHIT" ? 33.333333333 / 100 : id === "BRI" ? 1 / 100 : 0);
+    setCicilDp(id === "Kas Keras" ? 3 : id === "HHIT" ? 1 : id === "BRI" ? 6 : 0);
+    setDiskon(id === "Kas Keras" ? 6 : id === "HHIT" ? 6 : id === "BRI" ? 0 : 0);
+    setBunga(id === "Kas Keras" ? 0 : id === "HHIT" ? 6 / 100 : id === "BRI" ? 8.75 / 100 : 0);
+    setTc(id === "Kas Keras" ? "Dicicil 1 Tahun" : id === "HHIT" ? "Max 5 Tahun" : id === "BRI" ? "5 Tahun Fix Interest, setelah itu float" : "");
   }
 
   const handleLamaCicilan = (e) => {
@@ -163,7 +176,6 @@ const CicilanIdr = () => {
   }
   useEffect(() => {
     setPerumahan(homes);
-    setPayment(payments);
     console.log('lamacicilan',lamaCicilan)
 
     let r = (bunga * 100) / 12;
@@ -175,8 +187,8 @@ const CicilanIdr = () => {
     // console.log('n', n)
     r === 0 ?
       setCicilan(plafonCicilan / n) :
-      setCicilan(plafonCicilan * (((r / 100) * (1 + (r / 100))) ^ n) / ((1 + (r / 100)) ^ (n - 1)));
-  }, [payments,lamaCicilan, bunga, dp, hargaBeli,homes])
+      setCicilan(plafonCicilan * (r/100 * (1 + (r/100))**n)/((1+(r/100))** n-1));
+  }, [payments,lamaCicilan, bunga, dp, hargaBeli,homes, unit])
 
   return (
     <div className="container-sm contener">
@@ -253,7 +265,7 @@ const CicilanIdr = () => {
                   payment && payment !== undefined ?
                   payment.map((p, index) => {
                     return(
-                      <option key={index} value={p.id}>{p.name}</option>
+                      <option key={index} value={p}>{p}</option>
                     )
                   }) : "No Payment"
                 }
@@ -283,7 +295,7 @@ const CicilanIdr = () => {
                     className="col-form-label label-diskon"
                   >
                     <span className="me-1 text-diskon">Diskon</span>
-                    <span className="text-value-diskon">{hargaBeli !== 0 && hargaJual > hargaBeli ? (((hargaJual-hargaBeli)/hargaJual)*100).toFixed(2):0}%</span>
+                    <span className="text-value-diskon">{diskon}%</span>
                   </label>
                 </div>
               </div>
