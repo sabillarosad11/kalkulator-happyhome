@@ -236,9 +236,9 @@ const TheLeafMansion = () => {
                 </option>
                 {
                   pilihCicilan && pilihCicilan !== undefined ? 
-                  pilihCicilan.map((l, index) => {
+                  pilihCicilan.map((l) => {
                     return(
-                      <option key={index} value={l.value}>{l.name}</option>
+                      <option key={l.name} value={l.value}>{l.name}</option>
                     )
                   }) : "No Data"
                 }
