@@ -588,35 +588,35 @@ const InvestasiIdr = () => {
                     hargaBeli ? numberWithCommas(Math.round(tabelUntung1)) : 0
                   }
                 </td>
-                <td>{tabelUnit1}</td>
+                <td>{hargaBeli ? tabelUnit1 : 0}</td>
               </tr>
               <tr className="border-row">
                 <td>2</td>
                 <td className="pink text-bold">
                   Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung2)) : 0}
                 </td>
-                <td>{tabelUnit2}</td>
+                <td>{hargaBeli ? tabelUnit2 : 0}</td>
               </tr>
               <tr className="border-row">
                 <td>3</td>
                 <td className="pink text-bold">
                   Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung3)) : 0}
                 </td>
-                <td>{tabelUnit3}</td>
+                <td>{hargaBeli ? tabelUnit3 : 0}</td>
               </tr>
               <tr className="border-row">
                 <td>4</td>
                 <td className="pink text-bold">
                   Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung4)) : 0}
                 </td>
-                <td>{tabelUnit4}</td>
+                <td>{hargaBeli ? tabelUnit4 : 0}</td>
               </tr>
               <tr className="border-radius">
                 <td>5</td>
                 <td className="pink text-bold">
                   Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung5)) : 0}
                 </td>
-                <td>{tabelUnit5}</td>
+                <td>{hargaBeli ? tabelUnit5 : 0}</td>
               </tr>
             </tbody>
           </table>
