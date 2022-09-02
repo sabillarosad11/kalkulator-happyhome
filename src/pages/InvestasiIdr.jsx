@@ -641,13 +641,13 @@ const InvestasiIdr = () => {
             <div className="text-wrapper d-flex justify-content-between">
               <p>% Keuntungan</p>
               <p className="text-bold">
-                {handleNan(Math.round(persenUntung))}%
+                {handleNan(Math.round(persenUntung*100)/100)}%
               </p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>APY</p>
-              <p className="text-bold">{handleNan(Math.round(apy * 100))}%</p>
+              <p className="text-bold">{handleNan(Math.round((apy * 100)*100)/100)}%</p>
             </div>
           </div>
         </div>

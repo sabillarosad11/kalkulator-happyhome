@@ -371,7 +371,7 @@ const CicilanIdr = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Lama Cicilan DP</p>
-              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined && lamaCicilan !== 0 ? cicilDp : 0} Tahun</p>
+              <p className="text-bold">{lamaCicilan && lamaCicilan !== undefined && lamaCicilan !== 0 ? cicilDp : 0} Kali</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -379,10 +379,10 @@ const CicilanIdr = () => {
               <div className="d-flex">
                 <p className="text-bold">
                   Rp {
-                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp) / 12))) : 0
+                    lamaCicilan && lamaCicilan !== undefined ? numberWithCommas(Math.round(handleNan(((dp * hargaBeli) / cicilDp)))) : 0
                   }
                 </p>
-                <p> /bulan</p>
+                <p> /cicilan</p>
               </div>
             </div>
             <hr />
