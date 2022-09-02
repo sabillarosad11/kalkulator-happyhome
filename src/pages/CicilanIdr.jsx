@@ -89,9 +89,9 @@ const CicilanIdr = () => {
   const [tipeUnit, setTipeUnit] = useState(null)
   const [unitId, setUnitId] = useState();
   const [hargaJual, setHargaJual] = useState();
-  const [payment, setPayment] = useState([]);
+  const [payment, setPayment] = useState(null);
   const [valuePembayaran, setValuePembayaran] = useState(null)
-  const [pilihCicilan, setPilihCicilan] = useState([]);
+  const [pilihCicilan, setPilihCicilan] = useState(null);
   const [hargaBeli, setHargaBeli] = useState();
   const [textCicilan, setTextCicilan] = useState();
   const [dp, setDp] = useState();
@@ -111,6 +111,8 @@ const CicilanIdr = () => {
     setTipeUnit(null)
     setValuePembayaran(null)
     setLamaCicilan(null)
+    setPayment(null)
+    setPilihCicilan(null)
   }
 
   const handleUnit = (e) => {
@@ -118,18 +120,20 @@ const CicilanIdr = () => {
     const py = units.filter(x => x.value === e.target.value && x.perumahanId === unitId);
     console.log('py', py)
     setPayment(py[0].metode);
-    setValuePembayaran(null)
-    setLamaCicilan(null)
+    // setValuePembayaran(null)
+    // setLamaCicilan(null)
       // const xy = py.filter(x => x.perumahanId === unitId);
       // setPayment(xy[0].metode);
       // console.log 
   };
 
   const handleCicilan = (id) => {
+    console.log('id', id)
     setValuePembayaran(id)
     const dc = instalment.filter(x => x.paymentsId === id)
     setPilihCicilan(dc)
     setLamaCicilan(null)
+    console.log(id)
   }
 
   const handleLamaCicilan = (e) => {
@@ -193,6 +197,7 @@ const CicilanIdr = () => {
 
     console.log('lamacicilan',lamaCicilan)
     console.log('payment', payment)
+    console.log('value pembayaran', valuePembayaran)
 
     let r = (bunga * 100) / 12;
     let plafonCicilan = Math.round(hargaBeli - dp * hargaBeli);
@@ -247,7 +252,7 @@ const CicilanIdr = () => {
                 <option selected>Pilih Tipe Unit</option>
                 {
                   unit && unit !== undefined ? 
-                  unit.map((u) => {
+                  unit.map((u, index) => {
                     return(
                       <option key={u.id} value={u.value}>{u.name}</option>
                     )
@@ -281,7 +286,7 @@ const CicilanIdr = () => {
                   payment && payment !== undefined ?
                   payment.map((p, index) => {
                     return(
-                      <option key={p.id} value={p.name}>{p.name}</option>
+                      <option key={index} value={p.name}>{p.name}</option>
                     )
                   }) : "No Payment"
                 }

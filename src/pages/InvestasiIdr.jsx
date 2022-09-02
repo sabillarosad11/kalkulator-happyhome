@@ -8,22 +8,36 @@ const InvestasiIdr = () => {
   ],[])
 
   const units = useMemo(() => [
-    {perumahanId:"1", name:"Cluster Fuschia 27/60", value:"27/60"},
-    {perumahanId:"1", name:"Cluster Adenium 27/60", value:"27/60"},
-    {perumahanId:"1", name:"Cluster Bougenville 33/72", value:"33/72"},
-    {perumahanId:"2", name:"Tipe 30/60", value:"30/60"},
-    {perumahanId:"2", name:"Tipe 33/60", value:"33/60"},
-    {perumahanId:"2", name:"Tipe 32/70", value:"32/70"},
-    {perumahanId:"3", name:"Cluster Adenium 27/60", value:"27/60"},
-    {perumahanId:"3", name:"Cluster Alamanda 24/66", value:"24/66"},
-    {perumahanId:"3", name:"Cluster Alamanda 24/72", value:"24/72"},
-    {perumahanId:"3", name:"Cluster Bougenville 33/72", value:"33/72R"},
-    {perumahanId:"3", name:"Cluster Dahlia 35/72", value:"35/72"},
-    {perumahanId:"3", name:"Cluster Dahlia 52/72", value:"52/72"},
-    {perumahanId:"3", name:"Cluster Fuschia 28/60", value:"28/60"},
-    {perumahanId:"3", name:"Cluster Gardenia 28/60", value:"28/60"},
-    {perumahanId:"3", name:"Cluster Gardenia 30/72", value:"30/72"},
-    {perumahanId:"3", name:"Cluster Gardenia 36/72", value:"36/72"},
+    {id:"1", perumahanId:"1", name:"Cluster Fuschia 27/60", value:"27/60"},
+    {id:"2", perumahanId:"1", name:"Cluster Adenium 27/60", value:"27/60"},
+    {id:"3", perumahanId:"1", name:"Cluster Bougenville 33/72", value:"33/72"},
+    {id:"4", perumahanId:"2", name:"Tipe 30/60", value:"30/60"},
+    {id:"5", perumahanId:"2", name:"Tipe 33/60", value:"33/60"},
+    {id:"6", perumahanId:"2", name:"Tipe 32/70", value:"32/70"},
+    {id:"7", perumahanId:"3", name:"Cluster Adenium 27/60", value:"27/60"},
+    {id:"8", perumahanId:"3", name:"Cluster Alamanda 24/66", value:"24/66"},
+    {id:"9", perumahanId:"3", name:"Cluster Alamanda 24/72", value:"24/72"},
+    {id:"10", perumahanId:"3", name:"Cluster Bougenville 33/72", value:"33/72R"},
+    {id:"11", perumahanId:"3", name:"Cluster Dahlia 35/72", value:"35/72"},
+    {id:"12", perumahanId:"3", name:"Cluster Dahlia 52/72", value:"52/72"},
+    {id:"13", perumahanId:"3", name:"Cluster Fuschia 28/60", value:"28/60"},
+    {id:"14", perumahanId:"3", name:"Cluster Gardenia 28/60", value:"28/60"},
+    {id:"15", perumahanId:"3", name:"Cluster Gardenia 30/72", value:"30/72"},
+    {id:"16", perumahanId:"3", name:"Cluster Gardenia 36/72", value:"36/72"},
+  ],[])
+
+    const lamaInvestasi = useMemo(() => [
+    {id:"1", name:"6 Bulan", value:"6"},
+    {id:"2", name:"12 Bulan", value:"12"},
+    {id:"3", name:"18 Bulan", value:"18"},
+    {id:"4", name:"24 Bulan", value:"24"},
+    {id:"5", name:"30 Bulan", value:"30"},
+    {id:"6", name:"36 Bulan", value:"36"},
+    {id:"7", name:"42 Bulan", value:"42"},
+    {id:"8", name:"48 Bulan", value:"48"},
+    {id:"9", name:"54 Bulan", value:"54"},
+    {id:"10", name:"60 Bulan", value:"60"},
+
   ],[])
 
   const [perumahan, setPerumahan] = useState([])
@@ -32,11 +46,14 @@ const InvestasiIdr = () => {
   const [tipeUnit, setTipeUnit] = useState();
   const [hargaJual, setHargaJual] = useState();
   const [hargaBeli, setHargaBeli] = useState();
+  const [lama, setLama] = useState(null);
   const [dp, setDp] = useState();
   const [periode, setPeriode] = useState();
   const [durasi, setDurasi] = useState();
   const [check, setCheck] = useState();
   const [investasiAwal, setInvestasiAwal] = useState();
+  const [diskonInput, setDiskonInput] = useState();
+  const [diskon, setDiskon] = useState();
 
   const [tabelUntung1, setTabelUntung1] = useState();
   const [tabelUntung2, setTabelUntung2] = useState();
@@ -57,6 +74,9 @@ const InvestasiIdr = () => {
     console.log(id)
     const dc = units.filter(x => x.perumahanId === id)
     setUnit(dc)
+    setTipeUnit(null)
+    setDiskonInput(0)
+    setDiskon(0)
   }
   
   const handlePlus = () => {
@@ -71,6 +91,9 @@ const InvestasiIdr = () => {
 
   const handleUnit = (e) => {
     setTipeUnit(e.target.value);
+    setLama(lamaInvestasi)
+    setDiskonInput(12.00)
+    setDiskon(12)
   };
 
   const handlePeriode = (e) => {
@@ -337,9 +360,9 @@ const InvestasiIdr = () => {
                 <option selected>Pilih Perumahan</option>
                 {
                   perumahan && perumahan !== undefined ?
-                  perumahan.map((p, index) => {
+                  perumahan.map((p) => {
                     return(
-                      <option key={index} value={p.id}>{p.name}</option>
+                      <option key={p.id} value={p.id}>{p.name}</option>
                     )
                   }) : "No Perumahan"
                 }
@@ -359,9 +382,9 @@ const InvestasiIdr = () => {
                 <option selected>Pilih Tipe Unit</option>
                 {
                   unit && unit !== undefined ? 
-                  unit.map((u, index) => {
+                  unit.map((u) => {
                     return(
-                      <option key={index} value={u.value}>{u.name}</option>
+                      <option key={u.id} value={u.value}>{u.name}</option>
                     )
                   }) : "No Data"
                 }
@@ -407,7 +430,7 @@ const InvestasiIdr = () => {
                     className="col-form-label label-diskon"
                   >
                     <span className="me-1 text-diskon">Diskon</span>
-                    <span className="text-value-diskon">12.00%</span>
+                    <span className="text-value-diskon">{diskonInput}%</span>
                   </label>
                 </div>
               </div>
@@ -444,16 +467,14 @@ const InvestasiIdr = () => {
                 onChange={handlePeriode}
               >
                 <option selected>Pilih Periode</option>
-                <option value="6">6 Bulan</option>
-                <option value="12">12 Bulan</option>
-                <option value="18">18 Bulan</option>
-                <option value="24">24 Bulan</option>
-                <option value="30">30 Bulan</option>
-                <option value="36">36 Bulan</option>
-                <option value="42">42 Bulan</option>
-                <option value="48">48 Bulan</option>
-                <option value="54">54 Bulan</option>
-                <option value="60">60 Bulan</option>
+                {
+                  lama && lama !== undefined ?
+                  lama.map(l => {
+                    return(
+                      <option key={l.name} value={l.value}>{l.name}</option>
+                    )
+                  }) : "No data"
+                }
               </select>
             </div>
           </div>
@@ -502,7 +523,7 @@ const InvestasiIdr = () => {
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
               <p>Diskon</p>
-              <p className="text-bold">{periode && durasi ? 12.00 : 0}%</p>
+              <p className="text-bold">{periode && durasi ? diskon : 0}%</p>
             </div>
             <hr />
             <div className="text-wrapper d-flex justify-content-between">
@@ -563,35 +584,37 @@ const InvestasiIdr = () => {
               <tr className="border-row">
                 <td>1</td>
                 <td className="pink text-bold">
-                  Rp {numberWithCommas(Math.round(tabelUntung1))}
+                  Rp {
+                    hargaBeli ? numberWithCommas(Math.round(tabelUntung1)) : 0
+                  }
                 </td>
                 <td>{tabelUnit1}</td>
               </tr>
               <tr className="border-row">
                 <td>2</td>
                 <td className="pink text-bold">
-                  Rp {numberWithCommas(Math.round(tabelUntung2))}
+                  Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung2)) : 0}
                 </td>
                 <td>{tabelUnit2}</td>
               </tr>
               <tr className="border-row">
                 <td>3</td>
                 <td className="pink text-bold">
-                  Rp {numberWithCommas(Math.round(tabelUntung3))}
+                  Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung3)) : 0}
                 </td>
                 <td>{tabelUnit3}</td>
               </tr>
               <tr className="border-row">
                 <td>4</td>
                 <td className="pink text-bold">
-                  Rp {numberWithCommas(Math.round(tabelUntung4))}
+                  Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung4)) : 0}
                 </td>
                 <td>{tabelUnit4}</td>
               </tr>
               <tr className="border-radius">
                 <td>5</td>
                 <td className="pink text-bold">
-                  Rp {numberWithCommas(Math.round(tabelUntung5))}
+                  Rp {hargaBeli ? numberWithCommas(Math.round(tabelUntung5)) : 0}
                 </td>
                 <td>{tabelUnit5}</td>
               </tr>
@@ -604,7 +627,7 @@ const InvestasiIdr = () => {
             <div className="d-flex align-items-end">
               <span className="text-rp">Rp</span>
               <span className="text-price">
-                {numberWithCommas(Math.round(totalKeuntungan))}
+                {hargaBeli ? numberWithCommas(Math.round(totalKeuntungan)) : 0}
               </span>
             </div>
             <hr />
