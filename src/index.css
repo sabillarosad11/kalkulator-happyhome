@@ -59,12 +59,14 @@ select:focus {
   text-align: center;
   border-radius: 1px !important;
   position: relative;
+  max-height: 40px;
 }
 
 .counter button {
   width: 100px;
   border: 1px solid #ced4da;
   background-color: white;
+  max-height: 40px;
 }
 
 .counter .minus {
